@@ -1,0 +1,674 @@
+/*
+Theme Name:   Flatsome Child - Lalalay Residences
+Description:  Child theme của Flatsome cho website Chung cư Lalalay Residences cao cấp.
+Author:       Lalalay Residences
+Template:     Flatsome-IDTtkOtj0RP1c01I
+Version:      1.3.0
+Text Domain:  flatsome-child
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/*************** GLOBAL TYPOGRAPHY (MONTSERRAT HIỆN ĐẠI NHẤT) ***************/
+body,
+h1, h2, h3, h4, h5, h6,
+.nav > li > a,
+.header-nav a,
+input, textarea, select, button,
+.button,
+.entry-title {
+	font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/*************** LUXURY DESIGN SYSTEM ***************/
+:root {
+	--llr-gold: #c59b27;
+	--llr-gold-bright: #e2be62;
+	--llr-gold-dark: #ab841b;
+	--llr-gold-light: #fbf7ee;
+	--llr-gold-border: #e9dbc0;
+	--llr-dark: #0f172a;
+	--llr-navy: #080e18;
+	--llr-charcoal: #2d3748;
+	--llr-text-muted: #64748b;
+	--llr-bg-soft: #f8fafc;
+	--llr-radius: 12px;
+	--llr-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+	--llr-shadow-hover: 0 16px 36px rgba(197, 155, 39, 0.18);
+}
+
+/* HEADER & NAVIGATION (FIX LỖI MENU TRÀN HÀNG) */
+.header-main {
+	background: #ffffff !important;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+.header-main .header-inner {
+	flex-wrap: nowrap !important;
+	align-items: center !important;
+}
+#logo {
+	flex-shrink: 0 !important;
+}
+#logo img {
+	max-height: 52px !important;
+	width: auto !important;
+	object-fit: contain !important;
+}
+.header-main .flex-left.flex-grow {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-end !important;
+	margin-right: 12px !important;
+}
+.header-main .header-nav {
+	flex-wrap: nowrap !important;
+	display: flex !important;
+	align-items: center !important;
+}
+.header-main .header-nav > li > a {
+	padding-left: 9px !important;
+	padding-right: 9px !important;
+	font-size: 13px !important;
+	font-weight: 700 !important;
+	letter-spacing: 0.2px !important;
+	white-space: nowrap !important;
+	color: #1e293b !important;
+	transition: color 0.2s ease !important;
+}
+.header-main .header-nav > li.current-menu-item > a,
+.header-main .header-nav > li:hover > a {
+	color: #c59b27 !important;
+}
+.header-main .header-button {
+	flex-shrink: 0 !important;
+	white-space: nowrap !important;
+	margin-left: 10px !important;
+}
+.header-main .header-button .button {
+	background: linear-gradient(135deg, #c59b27, #ab841b) !important;
+	border: none !important;
+	color: #fff !important;
+	font-weight: 700 !important;
+	font-size: 13px !important;
+	padding: 8px 18px !important;
+	box-shadow: 0 4px 14px rgba(197, 155, 39, 0.35) !important;
+	white-space: nowrap !important;
+	margin: 0 !important;
+	border-radius: 99px !important;
+}
+.header-main .header-button .button:hover {
+	background: linear-gradient(135deg, #ab841b, #8a6813) !important;
+	transform: translateY(-1px);
+}
+
+/* Nút liên hệ nổi (Gọi / Zalo) */
+.llr-contact-float {
+	position: fixed;
+	left: 20px;
+	bottom: 24px;
+	z-index: 9999;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+.llr-contact-float a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 54px;
+	height: 54px;
+	border-radius: 50%;
+	color: #fff;
+	font-weight: 700;
+	font-size: 13px;
+	text-decoration: none;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, .28);
+	transition: all .25s ease;
+	position: relative;
+}
+.llr-contact-float a:hover {
+	transform: scale(1.1) translateY(-2px);
+	color: #fff;
+}
+.llr-contact-float .llr-call {
+	background: linear-gradient(135deg, #ef4444, #b91c1c);
+	animation: llr-pulse 1.8s infinite;
+}
+.llr-contact-float .llr-zalo {
+	background: linear-gradient(135deg, #0084ff, #0056b3);
+}
+.llr-contact-float svg { width: 24px; height: 24px; fill: #fff; }
+@keyframes llr-pulse {
+	0%   { box-shadow: 0 0 0 0 rgba(239, 68, 68, .6); }
+	70%  { box-shadow: 0 0 0 16px rgba(239, 68, 68, 0); }
+	100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Luxury Headings */
+.llr-heading-tag {
+	display: inline-block;
+	color: var(--llr-gold);
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	margin-bottom: 8px;
+	position: relative;
+}
+.llr-heading-main {
+	color: var(--llr-dark);
+	font-size: 32px;
+	font-weight: 800;
+	line-height: 1.3;
+	margin-bottom: 16px;
+}
+.llr-heading-desc {
+	color: var(--llr-text-muted);
+	font-size: 16px;
+	max-width: 780px;
+	margin: 0 auto 30px;
+	line-height: 1.7;
+}
+
+/* Golden Badges */
+.llr-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: var(--llr-gold-light);
+	border: 1px solid var(--llr-gold-border);
+	color: var(--llr-gold-dark);
+	padding: 6px 14px;
+	border-radius: 99px;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+}
+
+/* HERO STATS BAR (ROBUST HIGH CONTRAST) */
+.llr-hero-stats-bar {
+	background: rgba(11, 19, 34, 0.94) !important;
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	border: 1px solid rgba(226, 190, 98, 0.5) !important;
+	border-radius: 12px;
+	padding: 18px 24px;
+	box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+	margin: 0 auto;
+	max-width: 980px;
+}
+.llr-hero-stat-col {
+	padding: 8px 16px;
+	border-right: 1px solid rgba(226, 190, 98, 0.3);
+	text-align: center;
+}
+.llr-hero-stat-col:last-child {
+	border-right: none;
+}
+.llr-hero-stat-col .stat-num {
+	display: block;
+	font-size: 26px;
+	font-weight: 800;
+	color: #e2be62 !important;
+	line-height: 1.2;
+	margin-bottom: 4px;
+	text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+.llr-hero-stat-col .stat-label {
+	display: block;
+	font-size: 13px;
+	font-weight: 700;
+	color: #ffffff !important;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+.llr-hero-stat-col .stat-sub {
+	display: block;
+	font-size: 12px;
+	color: #cbd5e1 !important;
+	margin-top: 3px;
+}
+
+/* Luxury Metric Box */
+.llr-stat-card {
+	background: #fff;
+	border: 1px solid #edf2f7;
+	border-radius: var(--llr-radius);
+	padding: 24px 18px;
+	text-align: center;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+.llr-stat-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, #c59b27, #e2be62);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+.llr-stat-card:hover {
+	transform: translateY(-5px);
+	box-shadow: var(--llr-shadow-hover);
+	border-color: var(--llr-gold-border);
+}
+.llr-stat-card:hover::before {
+	opacity: 1;
+}
+.llr-stat-card .num {
+	font-size: 30px;
+	font-weight: 800;
+	color: var(--llr-gold-dark);
+	line-height: 1.1;
+	margin-bottom: 6px;
+}
+.llr-stat-card .label {
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--llr-dark);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+.llr-stat-card .sub {
+	font-size: 12px;
+	color: var(--llr-text-muted);
+	margin-top: 4px;
+}
+
+/* Luxury Content Cards */
+.llr-card {
+	background: #fff;
+	border-radius: var(--llr-radius);
+	border: 1px solid #edf2f7;
+	box-shadow: var(--llr-shadow);
+	padding: 30px;
+	transition: all 0.3s ease;
+	height: 100%;
+}
+.llr-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
+	border-color: var(--llr-gold-border);
+}
+
+/* Image Frames */
+.llr-img-frame {
+	border-radius: var(--llr-radius);
+	overflow: hidden;
+	box-shadow: var(--llr-shadow);
+	transition: all 0.3s ease;
+	background: #000;
+}
+.llr-img-frame img {
+	width: 100%;
+	height: auto;
+	display: block;
+	transition: transform 0.4s ease;
+}
+.llr-img-frame:hover img {
+	transform: scale(1.02);
+}
+
+/* Luxury Table */
+.llr-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	border-radius: var(--llr-radius);
+	overflow: hidden;
+	border: 1px solid #e2e8f0;
+	margin: 20px 0;
+	background: #fff;
+}
+.llr-table th, .llr-table td {
+	padding: 14px 18px;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom: 1px solid #f1f5f9;
+	font-size: 15px;
+}
+.llr-table tr:last-child th,
+.llr-table tr:last-child td {
+	border-bottom: none;
+}
+.llr-table th {
+	width: 32%;
+	background: var(--llr-gold-light);
+	color: var(--llr-dark);
+	font-weight: 700;
+	border-right: 1px solid #f1f5f9;
+}
+.llr-table td {
+	color: #334155;
+}
+.llr-table tr:hover td {
+	background: #fafafa;
+}
+
+/* FAQ Accordion */
+.llr-faq {
+	margin: 20px 0 35px;
+}
+.llr-faq-item {
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	margin-bottom: 12px;
+	background: #fff;
+	overflow: hidden;
+	transition: all 0.25s ease;
+}
+.llr-faq-item[open] {
+	border-color: var(--llr-gold);
+	box-shadow: 0 6px 20px rgba(197, 155, 39, 0.08);
+}
+.llr-faq-item summary {
+	cursor: pointer;
+	padding: 18px 22px;
+	font-weight: 700;
+	font-size: 16px;
+	color: var(--llr-dark);
+	list-style: none;
+	position: relative;
+	padding-right: 48px;
+	transition: color 0.2s ease;
+}
+.llr-faq-item summary::-webkit-details-marker { display: none; }
+.llr-faq-item summary:hover {
+	color: var(--llr-gold-dark);
+}
+.llr-faq-item summary::after {
+	content: "+";
+	position: absolute;
+	right: 22px;
+	top: 14px;
+	font-size: 24px;
+	color: var(--llr-gold);
+	font-weight: 400;
+}
+.llr-faq-item[open] summary::after {
+	content: "–";
+	color: var(--llr-gold-dark);
+}
+.llr-faq-a {
+	padding: 0 22px 18px;
+	color: #475569;
+	font-size: 15px;
+	line-height: 1.7;
+	border-top: 1px dashed #f1f5f9;
+	margin-top: 4px;
+	padding-top: 12px;
+}
+
+/* Luxury Form Box */
+.llr-form-box {
+	background: #fff;
+	padding: 36px 32px;
+	border-radius: var(--llr-radius);
+	box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+	border: 1px solid var(--llr-gold-border);
+	position: relative;
+}
+.llr-form-box::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background: linear-gradient(90deg, #c59b27, #e2be62, #bd6d38);
+	border-top-left-radius: var(--llr-radius);
+	border-top-right-radius: var(--llr-radius);
+}
+.llr-form-box h3 {
+	font-size: 22px;
+	font-weight: 800;
+	color: var(--llr-dark);
+	margin-bottom: 6px;
+	text-align: center;
+}
+.llr-form-box p.sub-lead {
+	font-size: 14px;
+	color: var(--llr-text-muted);
+	text-align: center;
+	margin-bottom: 22px;
+}
+.llr-form-box input[type="text"],
+.llr-form-box input[type="tel"],
+.llr-form-box input[type="email"],
+.llr-form-box textarea {
+	width: 100%;
+	padding: 12px 16px;
+	border-radius: 8px;
+	border: 1px solid #cbd5e1;
+	background: #f8fafc;
+	font-size: 14px;
+	margin-bottom: 12px;
+	transition: all 0.2s ease;
+	box-shadow: none;
+}
+.llr-form-box input:focus,
+.llr-form-box textarea:focus {
+	border-color: var(--llr-gold);
+	background: #fff;
+	box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.18);
+	outline: none;
+}
+.llr-form-box input[type="submit"] {
+	width: 100%;
+	padding: 14px 20px;
+	background: linear-gradient(135deg, #c59b27, #ab841b);
+	color: #fff;
+	font-weight: 800;
+	font-size: 15px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	box-shadow: 0 6px 20px rgba(197, 155, 39, 0.35);
+	transition: all 0.25s ease;
+	margin-top: 6px;
+}
+.llr-form-box input[type="submit"]:hover {
+	background: linear-gradient(135deg, #ab841b, #8a6813);
+	transform: translateY(-2px);
+	box-shadow: 0 10px 26px rgba(197, 155, 39, 0.45);
+}
+
+/* Feature Checkmarks */
+.llr-feature-item {
+	display: flex;
+	gap: 14px;
+	margin-bottom: 16px;
+	align-items: flex-start;
+}
+.llr-feature-icon {
+	flex-shrink: 0;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: var(--llr-gold-light);
+	color: var(--llr-gold-dark);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 14px;
+}
+.llr-feature-text h4 {
+	font-size: 16px;
+	font-weight: 700;
+	margin-bottom: 4px;
+	color: var(--llr-dark);
+}
+.llr-feature-text p {
+	font-size: 14px;
+	color: var(--llr-text-muted);
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* Topbar & Header */
+#top-bar {
+	background: #080e18 !important;
+	color: #e2e8f0;
+	font-size: 13px;
+	border-bottom: 1px solid rgba(197, 155, 39, 0.25);
+}
+#top-bar a {
+	color: #e2be62 !important;
+	font-weight: 700;
+}
+
+/* LUXURY FOOTER */
+.llr-luxury-footer {
+	border-top: 2px solid #c59b27 !important;
+	background: #080e18 !important;
+}
+.llr-luxury-footer a {
+	color: #cbd5e1 !important;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+.llr-luxury-footer a:hover {
+	color: #e2be62 !important;
+	text-decoration: underline;
+}
+.llr-footer-links li a:hover {
+	padding-left: 4px;
+	color: #e2be62 !important;
+}
+.footer-wrapper {
+	background: #080e18 !important;
+}
+
+/* BOTTOM FOOTER BAR (CHUYỂN GIỮA TRANG & NỀN VÀNG LOGO) */
+.absolute-footer {
+	background: linear-gradient(135deg, #c59b27, #b88f28) !important;
+	border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+	padding: 24px 15px !important;
+	text-align: center !important;
+}
+.absolute-footer .container {
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	justify-content: center !important;
+	text-align: center !important;
+	width: 100% !important;
+}
+.absolute-footer .footer-primary {
+	float: none !important;
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	justify-content: center !important;
+	text-align: center !important;
+	width: 100% !important;
+	margin: 0 auto !important;
+}
+.absolute-footer .footer-nav {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	justify-content: center !important;
+	align-items: center !important;
+	gap: 8px 20px !important;
+	margin: 0 auto 12px !important;
+	padding: 0 !important;
+	list-style: none !important;
+	text-align: center !important;
+}
+.absolute-footer .footer-nav li {
+	display: inline-block !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+}
+.absolute-footer .footer-nav li a {
+	color: #080e18 !important;
+	font-weight: 800 !important;
+	font-size: 13.5px !important;
+	letter-spacing: 0.5px !important;
+	text-decoration: none !important;
+	transition: all 0.2s ease !important;
+}
+.absolute-footer .footer-nav li a:hover {
+	color: #ffffff !important;
+	text-decoration: underline !important;
+}
+.absolute-footer .copyright-footer {
+	color: #1e293b !important;
+	font-size: 13.5px !important;
+	font-weight: 600 !important;
+	text-align: center !important;
+	margin: 0 auto !important;
+	line-height: 1.6 !important;
+}
+.absolute-footer .copyright-footer strong {
+	color: #080e18 !important;
+	font-weight: 800 !important;
+}
+.absolute-footer .copyright-footer a {
+	color: #080e18 !important;
+	font-weight: 800 !important;
+	text-decoration: underline !important;
+	transition: color 0.2s ease !important;
+}
+.absolute-footer .copyright-footer a:hover {
+	color: #ffffff !important;
+}
+
+/* SINGLE POST & SIDEBAR LUXURY STYLING */
+.single-post .entry-title {
+	font-size: 28px !important;
+	font-weight: 800 !important;
+	color: #0f172a !important;
+	line-height: 1.35 !important;
+	margin-bottom: 14px !important;
+}
+.single-post .entry-meta {
+	border-bottom: 1px solid #f1f5f9 !important;
+	padding-bottom: 14px !important;
+	margin-bottom: 24px !important;
+}
+.single-post .entry-content p {
+	font-size: 15.5px !important;
+	line-height: 1.8 !important;
+	color: #334155 !important;
+}
+.single-post .entry-content h2 {
+	font-size: 22px !important;
+	font-weight: 800 !important;
+	color: #0f172a !important;
+	margin-top: 32px !important;
+	margin-bottom: 14px !important;
+	border-left: 3px solid #c59b27;
+	padding-left: 12px;
+}
+.single-post .entry-content h3 {
+	font-size: 18px !important;
+	font-weight: 700 !important;
+	color: #1e293b !important;
+	margin-top: 24px !important;
+	margin-bottom: 10px !important;
+}
+#secondary .widget {
+	margin-bottom: 25px !important;
+}
+#secondary .widget-title {
+	font-size: 15px !important;
+	font-weight: 800 !important;
+	color: #0f172a !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+	border-bottom: 2px solid #c59b27 !important;
+	padding-bottom: 8px !important;
+	margin-bottom: 15px !important;
+}

@@ -1,0 +1,181 @@
+<?php
+/**
+ * Flatsome Child - Lalalay Residences
+ *
+ * @package flatsome-child
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Thông tin liên hệ – SỬA LẠI SỐ ĐIỆN THOẠI / ZALO THẬT TẠI ĐÂY.
+ */
+define( 'LLR_HOTLINE', '0855.220.000' );
+define( 'LLR_ZALO', '0855220000' );
+
+/*
+ * Ghi chú: Flatsome tự nạp style.css của child theme (handle 'flatsome-style'),
+ * nên không cần wp_enqueue_style ở đây.
+ */
+
+/**
+ * Nút Gọi điện / Zalo nổi – tăng chuyển đổi cho website bất động sản.
+ */
+add_action( 'wp_footer', function () {
+	if ( is_admin() ) {
+		return;
+	}
+	$phone = preg_replace( '/\D/', '', LLR_HOTLINE );
+	$zalo  = preg_replace( '/\D/', '', LLR_ZALO );
+	?>
+	<div class="llr-contact-float">
+		<a class="llr-zalo" href="<?php echo esc_url( 'https://zalo.me/' . $zalo ); ?>" target="_blank" rel="nofollow noopener" aria-label="Chat Zalo">Zalo</a>
+		<a class="llr-call" href="<?php echo esc_url( 'tel:' . $phone ); ?>" rel="nofollow" aria-label="Gọi hotline">
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+		</a>
+	</div>
+	<?php
+} );
+
+/**
+ * Dọn dẹp <head>: bỏ các thẻ không cần thiết cho SEO / bảo mật.
+ */
+remove_action( 'wp_head', 'wp_generator' );
+remove_action( 'wp_head', 'wlwmanifest_link' );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+add_filter( 'the_generator', '__return_empty_string' );
+
+/**
+ * Tắt XML-RPC (giảm nguy cơ brute-force).
+ */
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
+/**
+ * Tự động điền ALT cho ảnh khi upload (từ tên file) – tốt cho SEO hình ảnh.
+ */
+add_action( 'add_attachment', function ( $post_id ) {
+	if ( ! wp_attachment_is_image( $post_id ) ) {
+		return;
+	}
+	$title = get_the_title( $post_id );
+	$title = ucfirst( trim( preg_replace( '/[-_]+/', ' ', $title ) ) );
+	wp_update_post( array( 'ID' => $post_id, 'post_title' => $title ) );
+	if ( ! get_post_meta( $post_id, '_wp_attachment_image_alt', true ) ) {
+		update_post_meta( $post_id, '_wp_attachment_image_alt', $title );
+	}
+} );
+
+/**
+ * Shortcode [llr_hotline] / [llr_hotline link="1"] – hiển thị hotline từ hằng số LLR_HOTLINE.
+ */
+add_shortcode( 'llr_hotline', function ( $atts ) {
+	$atts  = shortcode_atts( array( 'link' => '1' ), $atts );
+	$phone = LLR_HOTLINE;
+	if ( '1' !== $atts['link'] ) {
+		return esc_html( $phone );
+	}
+	return '<a href="' . esc_url( 'tel:' . preg_replace( '/\D/', '', $phone ) ) . '" rel="nofollow"><strong>' . esc_html( $phone ) . '</strong></a>';
+} );
+
+/**
+ * FAQ: lưu ở post meta "_llr_faq" (mảng [ ['q'=>..., 'a'=>...], ... ]).
+ * - Shortcode [llr_faq] hiển thị FAQ dạng accordion.
+ * - Tự xuất schema FAQPage (JSON-LD) trên trang có FAQ.
+ */
+function llr_get_faq( $post_id = 0 ) {
+	$faq = get_post_meta( $post_id ? $post_id : get_the_ID(), '_llr_faq', true );
+	return is_array( $faq ) ? $faq : array();
+}
+
+add_shortcode( 'llr_faq', function () {
+	$faq = llr_get_faq();
+	if ( ! $faq ) {
+		return '';
+	}
+	$out = '<div class="llr-faq">';
+	foreach ( $faq as $item ) {
+		$out .= '<details class="llr-faq-item"><summary>' . esc_html( $item['q'] ) . '</summary><div class="llr-faq-a">' . wpautop( wp_kses_post( $item['a'] ) ) . '</div></details>';
+	}
+	return $out . '</div>';
+} );
+
+add_action( 'wp_head', function () {
+	if ( ! is_singular() ) {
+		return;
+	}
+	$faq = llr_get_faq( get_queried_object_id() );
+	if ( ! $faq ) {
+		return;
+	}
+	$entities = array();
+	foreach ( $faq as $item ) {
+		$entities[] = array(
+			'@type'          => 'Question',
+			'name'           => wp_strip_all_tags( $item['q'] ),
+			'acceptedAnswer' => array( '@type' => 'Answer', 'text' => wp_strip_all_tags( $item['a'] ) ),
+		);
+	}
+	$schema = array( '@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $entities );
+	echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+}, 20 );
+
+/**
+ * Rank Math: giữ các entity chung (WebSite, WebPage, Organization) trên trang
+ * kể cả khi không gán schema Article cho Page.
+ */
+add_filter( 'rank_math/schema/add_global_entities', '__return_true' );
+
+/**
+ * Tắt hoàn toàn phần bình luận trên toàn bộ website (tránh rác & tối ưu thẩm mỹ BĐS).
+ */
+add_filter( 'comments_open', '__return_false', 20, 2 );
+add_filter( 'pings_open', '__return_false', 20, 2 );
+add_filter( 'comments_template', function( $template ) {
+	return dirname( __FILE__ ) . '/empty-comments.php';
+}, 20 );
+
+/**
+ * Tối ưu hóa dòng thông tin ngày đăng bài viết:
+ * Thay thế dòng "Bởi [admin]" thô sơ bằng định dạng trang nhã: Ngày đăng & Dự án Lalalay Residences.
+ */
+if ( ! function_exists( 'flatsome_posted_on' ) ) :
+function flatsome_posted_on() {
+	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+	$time_string = sprintf(
+		$time_string,
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date( 'd/m/Y' ) )
+	);
+	echo '<span class="posted-on" style="color:#64748b; font-size:13px;"><i class="icon-clock"></i> Ngày đăng: ' . $time_string . '</span>';
+	echo '<span class="llr-meta-divider" style="margin:0 10px; color:#cbd5e1;">|</span>';
+	echo '<span class="llr-meta-project" style="color:#c59b27; font-weight:700; font-size:13px;">Chung cư Lalalay Residences</span>';
+}
+endif;
+
+/**
+ * Tự động gắn Khối CTA tư vấn và Bài viết liên quan ở cuối mỗi bài viết vệ tinh.
+ */
+add_filter( 'the_content', function( $content ) {
+	if ( is_single() && 'post' === get_post_type() && in_the_loop() && is_main_query() ) {
+		$cta = '
+<div class="llr-blog-cta" style="background: linear-gradient(135deg, #0b1322, #16243b); border: 2px solid #c59b27; border-radius: 12px; padding: 32px 28px; color: #fff; margin: 40px 0 30px;">
+  <span style="color:#e2be62; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; display:block; margin-bottom:8px;">TƯ VẤN TRỰC TIẾP TỪ CHỦ ĐẦU TƯ</span>
+  <h3 style="color:#fff; font-size:22px; font-weight:800; line-height:1.3; margin-bottom:12px;">ĐĂNG KÝ NHẬN TRỌN BỘ BẢNG GIÁ & MẶT BẰNG TÒA LALA 1</h3>
+  <p style="color:#cbd5e1; font-size:14.5px; line-height:1.6; margin-bottom:20px;">
+    Quý khách hàng quan tâm dự án <strong>Chung cư Lalalay Residences</strong> vui lòng để lại thông tin hoặc liên hệ Hotline để được tư vấn chọn căn tầng đẹp nhất đợt 1 và nhận vé tham quan nhà mẫu thực tế.
+  </p>
+  <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+    <a href="' . esc_url( home_url( '/lien-he/#dang-ky' ) ) . '" class="button primary" style="background:linear-gradient(135deg,#c59b27,#ab841b); border:none; color:#fff; font-weight:700; border-radius:99px; padding:10px 24px; margin:0;">NHẬN BÁO GIÁ ĐỢT 1</a>
+    <a href="tel:0855220000" class="button white is-outline" style="border-radius:99px; font-weight:700; padding:10px 20px; margin:0; color:#fff; border-color:#e2be62;">HOTLINE: 0855.220.000</a>
+  </div>
+</div>
+
+<div class="llr-related-posts" style="margin-top:35px; border-top:1px solid #e2e8f0; padding-top:25px;">
+  <h3 style="font-size:18px; font-weight:800; color:#0f172a; border-bottom:2px solid #c59b27; padding-bottom:8px; margin-bottom:20px; text-transform:uppercase; letter-spacing:0.5px;">BÀI VIẾT NỔI BẬT CÙNG CHUYÊN MỤC</h3>
+  ' . do_shortcode( '[blog_posts style="normal" columns="3" columns__md="1" posts="3" show_date="text" excerpt="false" image_height="56.25%"]' ) . '
+</div>';
+		return $content . $cta;
+	}
+	return $content;
+}, 30 );
