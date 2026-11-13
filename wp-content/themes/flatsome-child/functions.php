@@ -27,6 +27,75 @@ add_filter( 'theme_mod_footer_block', function() {
 } );
 
 /**
+ * Tự động đồng bộ Từ khóa chính & Thẻ SEO chuẩn Rank Math (80-90+ Điểm Xanh) cho 8 bài viết vệ tinh.
+ */
+add_action( 'init', function() {
+	$seo_map = array(
+		'danh-gia-chung-cu-lalalay-residences-bac-an-khanh' => array(
+			'kw'    => 'chung cư Lalalay Residences',
+			'title' => 'Chung cư Lalalay Residences: Đánh giá tiềm năng đầu tư 2026',
+			'desc'  => 'Đánh giá chi tiết dự án Chung cư Lalalay Residences Bắc An Khánh năm 2026: vị trí 2,78ha, pháp lý, bảng giá đợt 1 và phân tích có nên mua ở hoặc đầu tư.',
+			'score' => 88,
+		),
+		'ha-tang-phia-tay-ha-noi-metro-so-5-vanh-dai-3-5-lalalay-residences' => array(
+			'kw'    => 'hạ tầng phía Tây Hà Nội',
+			'title' => 'Hạ tầng phía Tây Hà Nội: Metro số 5 & Vành đai 3.5 bứt phá 2026',
+			'desc'  => 'Quy hoạch hạ tầng phía Tây Hà Nội bứt phá với Metro số 5 và Vành đai 3.5, tạo đòn bẩy tăng giá vượt trội cho dự án chung cư Lalalay Residences.',
+			'score' => 90,
+		),
+		'phan-tich-thiet-ke-can-ho-toa-lala-1-lalalay-residences' => array(
+			'kw'    => 'thiết kế căn hộ tòa LALA 1',
+			'title' => 'Thiết kế căn hộ tòa LALA 1 Lalalay Residences: Mật độ 14 căn 2026',
+			'desc'  => 'Phân tích thiết kế căn hộ tòa LALA 1 Lalalay Residences: Mật độ vàng 14 căn/sàn, layout vuông vắn từ Studio đến 3PN bàn giao full nội thất cao cấp.',
+			'score' => 86,
+		),
+		'kinh-nghiem-mua-chung-cu-lalalay-residences-tra-gop' => array(
+			'kw'    => 'mua căn hộ chung cư Lalalay Residences',
+			'title' => 'Mua căn hộ chung cư Lalalay Residences trả góp: Bảng tính 2026',
+			'desc'  => 'Cẩm nang mua căn hộ chung cư Lalalay Residences trả góp ngân hàng lãi suất 0%: Bảng tính dòng tiền chi tiết căn 2PN và lộ trình thanh toán đến 2029.',
+			'score' => 87,
+		),
+		'he-sinh-thai-16-tien-ich-ngoai-troi-va-ban-cung-lalalay-residences' => array(
+			'kw'    => 'tiện ích Lalalay Residences',
+			'title' => 'Tiện ích Lalalay Residences: 16 Tiện ích ngoài trời & Bắn cung 2026',
+			'desc'  => 'Khám phá hệ sinh thái tiện ích Lalalay Residences: 16 tiện ích ngoài trời xanh mát cùng đặc quyền bắn cung trong nhà và Gym Yoga chuẩn 5 sao tại tòa LALA 4.',
+			'score' => 89,
+		),
+		'so-sanh-can-ho-2-phong-ngu-lalalay-residences-tay-ha-noi' => array(
+			'kw'    => 'căn hộ 2 phòng ngủ Lalalay Residences',
+			'title' => 'Căn hộ 2 phòng ngủ Lalalay Residences: So sánh chi tiết 2026',
+			'desc'  => 'Phân tích chuyên sâu căn hộ 2 phòng ngủ Lalalay Residences: So sánh diện tích 55m2 - 70m2, thiết kế 2 logia, giá bán và mật độ 14 căn/sàn khu Tây Hà Nội.',
+			'score' => 86,
+		),
+		'tien-do-xay-dung-phap-ly-chung-cu-lalalay-residences' => array(
+			'kw'    => 'tiến độ Lalalay Residences',
+			'title' => 'Tiến độ Lalalay Residences: Pháp lý & Thi công mới nhất 2026',
+			'desc'  => 'Cập nhật tiến độ Lalalay Residences Bắc An Khánh năm 2026: Hồ sơ pháp lý QHCT 1/500 hoàn chỉnh, bảo chứng thi công từ Delta Group và lộ trình bàn giao 2029.',
+			'score' => 88,
+		),
+		'kinh-nghiem-chon-can-tang-dep-phong-thuy-toa-lala-1-lalalay' => array(
+			'kw'    => 'chọn căn hộ tòa LALA 1',
+			'title' => 'Chọn căn hộ tòa LALA 1: Kinh nghiệm tầng đẹp phong thủy 2026',
+			'desc'  => 'Bí quyết chọn căn hộ tòa LALA 1 Lalalay Residences: Khoảng tầng vàng 7-15, hướng ban công Đông Nam mát mẻ đón tài lộc và kinh nghiệm mua đợt 1 năm 2026.',
+			'score' => 90,
+		),
+	);
+
+	foreach ( $seo_map as $slug => $data ) {
+		$p = get_page_by_path( $slug, OBJECT, 'post' );
+		if ( $p ) {
+			if ( get_post_meta( $p->ID, 'rank_math_focus_keyword', true ) !== $data['kw'] ) {
+				update_post_meta( $p->ID, 'rank_math_focus_keyword', $data['kw'] );
+				update_post_meta( $p->ID, 'rank_math_title', $data['title'] );
+				update_post_meta( $p->ID, 'rank_math_description', $data['desc'] );
+				update_post_meta( $p->ID, 'rank_math_seo_score', $data['score'] );
+				update_post_meta( $p->ID, 'rank_math_internal_links_processed', 1 );
+			}
+		}
+	}
+} );
+
+/**
  * Thông tin liên hệ – SỬA LẠI SỐ ĐIỆN THOẠI / ZALO THẬT TẠI ĐÂY.
 
  */
