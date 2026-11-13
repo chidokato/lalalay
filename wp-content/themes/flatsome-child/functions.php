@@ -27,6 +27,21 @@ add_filter( 'theme_mod_footer_block', function() {
 } );
 
 /**
+ * Ẩn mục Tin tức trên thanh điều hướng menu chính theo yêu cầu.
+ */
+add_filter( 'wp_nav_menu_objects', function( $items ) {
+	if ( ! is_array( $items ) ) {
+		return $items;
+	}
+	foreach ( $items as $key => $item ) {
+		if ( false !== strpos( $item->url, '/tin-tuc/' ) || 'Tin tức' === $item->title ) {
+			unset( $items[ $key ] );
+		}
+	}
+	return $items;
+} );
+
+/**
  * Tự động đồng bộ Từ khóa chính & Thẻ SEO chuẩn Rank Math (80-90+ Điểm Xanh) cho 8 bài viết vệ tinh.
  */
 add_action( 'init', function() {

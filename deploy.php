@@ -7,6 +7,9 @@
 // Secret key to prevent unauthorized execution
 define('DEPLOY_SECRET', 'lalalay_deploy_secret_2026');
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Check security token via GET parameter or GitHub Webhook signature
 $provided_token = $_GET['token'] ?? '';
 if (empty($provided_token) && isset($_SERVER['HTTP_X_HUB_SIGNATURE_256'])) {

@@ -81,6 +81,13 @@ input, textarea, select, button,
 .header-main .header-nav > li:hover > a {
 	color: #c59b27 !important;
 }
+
+/* ẨN MỤC TIN TỨC TRÊN THANH MENU HEADER */
+.header-nav li a[href*="/tin-tuc/"],
+.nav li a[href*="/tin-tuc/"],
+.mobile-sidebar a[href*="/tin-tuc/"] {
+	display: none !important;
+}
 .header-main .header-button {
 	flex-shrink: 0 !important;
 	white-space: nowrap !important;
