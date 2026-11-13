@@ -8,7 +8,27 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Chuẩn hóa logo và link header cho cả local và hosting (khắc phục triệt để lỗi logo).
+ */
+add_filter( 'theme_mod_site_logo', function() {
+	return 'https://lalalayresidences.info.vn/wp-content/uploads/2026/11/logo-lalalay-header-1.png';
+} );
+add_filter( 'theme_mod_site_logo_sticky', function() {
+	return 'https://lalalayresidences.info.vn/wp-content/uploads/2026/11/logo-lalalay-header-1.png';
+} );
+add_filter( 'theme_mod_site_logo_dark', function() {
+	return 'https://lalalayresidences.info.vn/wp-content/uploads/2026/11/logo-lalalay-header-1.png';
+} );
+add_filter( 'theme_mod_header_button_1_link', function() {
+	return 'https://lalalayresidences.info.vn/lien-he/#dang-ky';
+} );
+add_filter( 'theme_mod_footer_block', function() {
+	return 'footer-lalalay';
+} );
+
+/**
  * Thông tin liên hệ – SỬA LẠI SỐ ĐIỆN THOẠI / ZALO THẬT TẠI ĐÂY.
+
  */
 define( 'LLR_HOTLINE', '0855.220.000' );
 define( 'LLR_ZALO', '0855220000' );
