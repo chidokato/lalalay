@@ -94,6 +94,12 @@ add_action( 'init', function() {
 			'desc'  => 'Bí quyết chọn căn hộ tòa LALA 1 Lalalay Residences: Khoảng tầng vàng 7-15, hướng ban công Đông Nam mát mẻ đón tài lộc và kinh nghiệm mua đợt 1 năm 2026.',
 			'score' => 90,
 		),
+		'vi-tri-du-an-chung-cu-lalalay-residences' => array(
+			'kw'    => 'vị trí dự án chung cư Lalalay Residences',
+			'title' => 'Vị trí dự án chung cư Lalalay Residences: Tâm điểm kết nối 2026',
+			'desc'  => 'Khám phá chi tiết vị trí dự án chung cư Lalalay Residences tại Bắc An Khánh: Tâm điểm đón sóng hạ tầng Vành đai 3.5, Metro số 5 và Đại lộ Thăng Long.',
+			'score' => 90,
+		),
 	);
 
 	foreach ( $seo_map as $slug => $data ) {
