@@ -264,20 +264,21 @@ function flatsome_posted_on() {
 endif;
 
 /**
- * Tự động gắn Khối CTA tư vấn và Bài viết liên quan ở cuối mỗi bài viết vệ tinh.
+ * Tự động gắn Khối Form đăng ký & Bài viết liên quan ở cuối mỗi bài viết vệ tinh.
  */
 add_filter( 'the_content', function( $content ) {
 	if ( is_single() && 'post' === get_post_type() && in_the_loop() && is_main_query() ) {
 		$cta = '
-<div class="llr-blog-cta" style="background: linear-gradient(135deg, #0b1322, #16243b); border: 2px solid #c59b27; border-radius: 12px; padding: 32px 28px; color: #fff; margin: 40px 0 30px;">
-  <span style="color:#e2be62; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; display:block; margin-bottom:8px;">TƯ VẤN TRỰC TIẾP TỪ CHỦ ĐẦU TƯ</span>
-  <h3 style="color:#fff; font-size:22px; font-weight:800; line-height:1.3; margin-bottom:12px;">ĐĂNG KÝ NHẬN TRỌN BỘ BẢNG GIÁ & MẶT BẰNG TÒA LALA 1</h3>
-  <p style="color:#cbd5e1; font-size:14.5px; line-height:1.6; margin-bottom:20px;">
-    Quý khách hàng quan tâm dự án <strong>Chung cư Lalalay Residences</strong> vui lòng để lại thông tin hoặc liên hệ Hotline để được tư vấn chọn căn tầng đẹp nhất đợt 1 và nhận vé tham quan nhà mẫu thực tế.
-  </p>
-  <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
-    <a href="' . esc_url( home_url( '/lien-he/#dang-ky' ) ) . '" class="button primary" style="background:linear-gradient(135deg,#c59b27,#ab841b); border:none; color:#fff; font-weight:700; border-radius:99px; padding:10px 24px; margin:0;">NHẬN BÁO GIÁ ĐỢT 1</a>
-    <a href="tel:0855220000" class="button white is-outline" style="border-radius:99px; font-weight:700; padding:10px 20px; margin:0; color:#fff; border-color:#e2be62;">HOTLINE: 0855.220.000</a>
+<div class="llr-blog-cta" style="background: linear-gradient(135deg, #0b1322, #16243b); border: 2px solid #c59b27; border-radius: 12px; padding: 32px 24px; color: #fff; margin: 40px 0 30px;">
+  <div style="text-align:center; max-width:650px; margin:0 auto 20px;">
+    <span style="color:#e2be62; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; display:block; margin-bottom:8px;">TƯ VẤN TRỰC TIẾP TỪ CHỦ ĐẦU TƯ</span>
+    <h3 style="color:#fff; font-size:22px; font-weight:800; line-height:1.3; margin-bottom:10px;">ĐĂNG KÝ NHẬN TRỌN BỘ BẢNG GIÁ & MẶT BẰNG TÒA LALA 1</h3>
+    <p style="color:#cbd5e1; font-size:14px; line-height:1.6; margin-bottom:8px;">
+      Quý khách để lại thông tin để nhận bảng giá gốc, mặt bằng bóc mái chi tiết căn hộ tòa LALA 1 hoặc liên hệ Hotline 24/7: <a href="tel:0855220000" style="color:#e2be62; font-weight:700;">0855.220.000</a>
+    </p>
+  </div>
+  <div class="llr-form-box" style="background:#ffffff; border-radius:10px; padding:24px 20px; max-width:580px; margin:0 auto; box-shadow:0 12px 35px rgba(0,0,0,0.35);">
+    ' . do_shortcode( '[contact-form-7 id="10" title="Đăng ký nhận bảng giá"]' ) . '
   </div>
 </div>
 
@@ -289,3 +290,77 @@ add_filter( 'the_content', function( $content ) {
 	}
 	return $content;
 }, 30 );
+
+/**
+ * Tự động ghi nhận Dự án, Nguồn bài viết / trang và Thiết bị khi khách gửi Form Contact Form 7.
+ */
+add_filter( 'wpcf7_posted_data', function( $posted_data ) {
+	if ( empty( $posted_data['du_an'] ) ) {
+		$posted_data['du_an'] = 'Chung cư Lalalay Residences';
+	}
+
+	$submission = WPCF7_Submission::get_instance();
+	$post_id    = $submission ? $submission->get_meta( 'container_post_id' ) : 0;
+
+	if ( empty( $posted_data['nguon_trang'] ) ) {
+		if ( $post_id && ( $p = get_post( $post_id ) ) ) {
+			$posted_data['nguon_trang'] = $p->post_title;
+		} elseif ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+			$ref_url  = esc_url_raw( $_SERVER['HTTP_REFERER'] );
+			$ref_path = wp_parse_url( $ref_url, PHP_URL_PATH );
+			$ref_slug = trim( $ref_path, '/' );
+			$ref_post = get_page_by_path( $ref_slug, OBJECT, array( 'post', 'page' ) );
+			$posted_data['nguon_trang'] = $ref_post ? $ref_post->post_title : ( 'Trang: ' . ( $ref_slug ?: 'Trang chủ' ) );
+		} else {
+			$posted_data['nguon_trang'] = 'Trang chủ Lalalay Residences';
+		}
+	}
+
+	if ( empty( $posted_data['link_nguon'] ) ) {
+		if ( $post_id ) {
+			$posted_data['link_nguon'] = get_permalink( $post_id );
+		} elseif ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+			$posted_data['link_nguon'] = esc_url_raw( $_SERVER['HTTP_REFERER'] );
+		} else {
+			$posted_data['link_nguon'] = home_url( '/' );
+		}
+	}
+
+	if ( empty( $posted_data['thiet_bi'] ) ) {
+		$posted_data['thiet_bi'] = wp_is_mobile() ? 'Điện thoại (Mobile)' : 'Máy tính (Desktop)';
+	}
+
+	return $posted_data;
+} );
+
+/**
+ * Frontend script: Tự động điền URL, Tiêu đề trang và Thiết bị vào form ngầm trước khi submit.
+ */
+add_action( 'wp_footer', function() {
+	?>
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var pageTitle = document.title ? document.title.split('|')[0].trim() : '';
+		var pageUrl = window.location.href;
+		var isMobile = (window.innerWidth <= 768) ? 'Điện thoại (Mobile)' : 'Máy tính (Desktop)';
+
+		function fillTrackingFields() {
+			document.querySelectorAll('.wpcf7-form').forEach(function(form) {
+				var duAn = form.querySelector('input[name="du_an"]');
+				var title = form.querySelector('input[name="nguon_trang"]');
+				var link = form.querySelector('input[name="link_nguon"]');
+				var device = form.querySelector('input[name="thiet_bi"]');
+
+				if (duAn && !duAn.value) duAn.value = 'Chung cư Lalalay Residences';
+				if (title) title.value = pageTitle || 'Trang chủ Lalalay Residences';
+				if (link) link.value = pageUrl;
+				if (device) device.value = isMobile;
+			});
+		}
+
+		fillTrackingFields();
+		setTimeout(fillTrackingFields, 500);
+	});
+	</script>
+	<?php
+}, 99 );
