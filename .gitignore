@@ -1,0 +1,39 @@
+# ==========================================
+# WordPress Configuration & Credentials
+# ==========================================
+wp-config.php
+wp-config-local.php
+.env
+
+# ==========================================
+# Server, Logs & Environment
+# ==========================================
+.htaccess
+*.log
+error_log
+debug.log
+
+# ==========================================
+# WordPress Cache, Upload Backups & Upgrades
+# ==========================================
+wp-content/debug.log
+wp-content/cache/
+wp-content/backups/
+wp-content/updraft/
+wp-content/upgrade/
+
+# ==========================================
+# OS & System Files
+# ==========================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ==========================================
+# IDE & Code Editors
+# ==========================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
