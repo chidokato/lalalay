@@ -12,6 +12,9 @@ wp-config-local.php
 *.log
 error_log
 debug.log
+*.sql
+*.sql.gz
+
 
 # ==========================================
 # WordPress Cache, Upload Backups & Upgrades
