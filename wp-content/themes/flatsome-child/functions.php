@@ -100,6 +100,12 @@ add_action( 'init', function() {
 			'desc'  => 'Khám phá chi tiết vị trí dự án chung cư Lalalay Residences tại Bắc An Khánh: Tâm điểm đón sóng hạ tầng Vành đai 3.5, Metro số 5 và Đại lộ Thăng Long.',
 			'score' => 90,
 		),
+		'thiet-ke-can-ho-1-phong-ngu-du-an-lalalay-residences' => array(
+			'kw'    => 'thiết kế căn hộ 1 phòng ngủ dự án Lalalay Residences',
+			'title' => 'Thiết kế căn hộ 1 phòng ngủ dự án Lalalay Residences chi tiết 2026',
+			'desc'  => 'Khám phá chi tiết thiết kế căn hộ 1 phòng ngủ dự án Lalalay Residences: Mặt bằng tối ưu công năng, không gian cộng một đa năng và tiêu chuẩn bàn giao cao cấp 2026.',
+			'score' => 92,
+		),
 	);
 
 	foreach ( $seo_map as $slug => $data ) {
