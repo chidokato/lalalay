@@ -106,6 +106,24 @@ add_action( 'init', function() {
 			'desc'  => 'Khám phá chi tiết thiết kế căn hộ 1 phòng ngủ dự án Lalalay Residences: Mặt bằng tối ưu công năng, không gian cộng một đa năng và tiêu chuẩn bàn giao cao cấp 2026.',
 			'score' => 92,
 		),
+		'thiet-ke-can-ho-3-phong-ngu-du-an-lalalay-residences' => array(
+			'kw'    => 'thiết kế căn hộ 3 phòng ngủ dự án Lalalay Residences',
+			'title' => 'Thiết kế căn hộ 3 phòng ngủ dự án Lalalay Residences chi tiết 2026',
+			'desc'  => 'Khám phá chi tiết thiết kế căn hộ 3 phòng ngủ dự án Lalalay Residences: Căn góc 2 mặt thoáng panorama, tối ưu không gian cho gia đình đa thế hệ năm 2026.',
+			'score' => 92,
+		),
+		'bang-gia-du-an-lalalay-residences' => array(
+			'kw'    => 'bảng giá dự án Lalalay Residences',
+			'title' => 'Bảng giá dự án Lalalay Residences và chính sách đợt 1 năm 2026',
+			'desc'  => 'Cập nhật chi tiết bảng giá dự án Lalalay Residences đợt 1: Chính sách ưu đãi chiết khấu, tiến độ thanh toán giãn đến 2029 và hỗ trợ lãi suất 0% từ CĐT.',
+			'score' => 92,
+		),
+		'chu-dau-tu-du-an-lalalay-residences' => array(
+			'kw'    => 'chủ đầu tư dự án Lalalay Residences',
+			'title' => 'Chủ đầu tư dự án Lalalay Residences: Uy tín và năng lực năm 2026',
+			'desc'  => 'Tìm hiểu chi tiết chủ đầu tư dự án Lalalay Residences: Năng lực tài chính Ramond Holdings, bảo chứng thi công từ Delta Group và pháp lý minh bạch 2026.',
+			'score' => 92,
+		),
 	);
 
 	foreach ( $seo_map as $slug => $data ) {
