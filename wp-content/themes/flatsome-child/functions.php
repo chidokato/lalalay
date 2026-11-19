@@ -124,6 +124,66 @@ add_action( 'init', function() {
 			'desc'  => 'Tìm hiểu chi tiết chủ đầu tư dự án Lalalay Residences: Năng lực tài chính Ramond Holdings, bảo chứng thi công từ Delta Group và pháp lý minh bạch 2026.',
 			'score' => 92,
 		),
+		'so-sanh-lalalay-residences-va-vinhomes-smart-city' => array(
+			'kw'    => 'so sánh Lalalay Residences và Vinhomes Smart City',
+			'title' => 'So sánh Lalalay Residences và Vinhomes Smart City chi tiết 2026',
+			'desc'  => 'Phân tích chi tiết so sánh Lalalay Residences và Vinhomes Smart City: Khác biệt về mật độ cư dân, không gian sinh thái, vị trí và bài toán mua ở thực 2026.',
+			'score' => 92,
+		),
+		'truong-hoc-quanh-du-an-lalalay-residences' => array(
+			'kw'    => 'trường học quanh dự án Lalalay Residences',
+			'title' => 'Hệ thống trường học quanh dự án Lalalay Residences Bắc An Khánh',
+			'desc'  => 'Tổng hợp hệ thống trường học quanh dự án Lalalay Residences: Trường quốc tế Mỹ St. Paul, Vinschool, Marie Curie, Alpha School giúp con phát triển toàn diện.',
+			'score' => 92,
+		),
+		'quy-hoach-hoai-duc-len-quan-lalalay-residences' => array(
+			'kw'    => 'quy hoạch Hoài Đức lên Quận Lalalay Residences',
+			'title' => 'Quy hoạch Hoài Đức lên Quận 2026: Đòn bẩy cho Lalalay Residences',
+			'desc'  => 'Phân tích quy hoạch Hoài Đức lên Quận năm 2026: Tác động hạ tầng Vành đai 3.5, Metro số 5 và cơ hội tăng giá vượt trội cho Chung cư Lalalay Residences.',
+			'score' => 92,
+		),
+		'ky-hop-dong-mua-ban-can-ho-lalalay-residences' => array(
+			'kw'    => 'ký hợp đồng mua bán căn hộ Lalalay Residences',
+			'title' => 'Quy trình đặt cọc và ký hợp đồng mua bán Lalalay Residences 2026',
+			'desc'  => 'Cẩm nang hướng dẫn quy trình đặt cọc và ký hợp đồng mua bán căn hộ Lalalay Residences: 5 bước chuẩn hóa, hồ sơ pháp lý và lưu ý quyền lợi người mua 2026.',
+			'score' => 92,
+		),
+		'so-sanh-lalalay-residences-va-lumi-hanoi' => array(
+			'kw'    => 'so sánh Lalalay Residences và Lumi Hanoi',
+			'title' => 'So sánh Lalalay Residences và Lumi Hanoi chi tiết 2026',
+			'desc'  => 'So sánh chi tiết Lalalay Residences và Lumi Hanoi: Đánh giá vị trí, giá bán, không gian sinh thái KĐT Bắc An Khánh và tiềm năng tăng giá năm 2026.',
+			'score' => 92,
+		),
+		'chi-phi-dich-vu-chung-cu-lalalay-residences' => array(
+			'kw'    => 'chi phí dịch vụ chung cư Lalalay Residences',
+			'title' => 'Chi phí dịch vụ chung cư Lalalay Residences dự kiến 2026',
+			'desc'  => 'Chi tiết bảng chi phí dịch vụ chung cư Lalalay Residences dự kiến: Phí quản lý hàng tháng, phí gửi xe máy ô tô, tiền điện nước và tiêu chuẩn an ninh 24/7.',
+			'score' => 92,
+		),
+		'co-nen-mua-can-ho-toa-lala-1-dot-1' => array(
+			'kw'    => 'có nên mua căn hộ tòa LALA 1 đợt 1',
+			'title' => 'Có nên mua căn hộ tòa LALA 1 đợt 1 Lalalay Residences?',
+			'desc'  => 'Phân tích chuyên sâu: Có nên mua căn hộ tòa LALA 1 đợt 1 dự án Lalalay Residences? Nguyên tắc đầu tư F0, biên độ tăng giá và chính sách ưu đãi năm 2026.',
+			'score' => 92,
+		),
+		'so-sanh-lalalay-residences-va-moonlight-1' => array(
+			'kw'    => 'so sánh Lalalay Residences và Moonlight 1',
+			'title' => 'So sánh Lalalay Residences và Moonlight 1 An Lạc chi tiết 2026',
+			'desc'  => 'So sánh Lalalay Residences và Moonlight 1 An Lạc Green Symphony: Đánh giá vị trí Vành đai 3.5, tiện ích, mật độ xây dựng và tiềm năng đầu tư 2026.',
+			'score' => 92,
+		),
+		'tien-ich-toa-lala-4-lalalay-residences' => array(
+			'kw'    => 'tiện ích tòa LALA 4 Lalalay Residences',
+			'title' => 'Trải nghiệm tiện ích tòa LALA 4 Lalalay Residences chi tiết 2026',
+			'desc'  => 'Khám phá đặc quyền tiện ích tòa LALA 4 Lalalay Residences: Câu lạc bộ bắn cung trong nhà độc bản, phòng Gym Yoga kính tràn và không gian rèn luyện đẳng cấp 2026.',
+			'score' => 92,
+		),
+		'dau-tu-can-ho-cho-thue-lalalay-residences' => array(
+			'kw'    => 'đầu tư căn hộ cho thuê Lalalay Residences',
+			'title' => 'Đầu tư căn hộ cho thuê Lalalay Residences: Tỷ suất sinh lời 2026',
+			'desc'  => 'Phân tích bài toán đầu tư căn hộ cho thuê Lalalay Residences Bắc An Khánh: Nguồn cầu chuyên gia, tỷ suất sinh lời kỳ vọng 8 - 10%/năm và tiềm năng tăng giá vốn.',
+			'score' => 92,
+		),
 	);
 
 	foreach ( $seo_map as $slug => $data ) {
